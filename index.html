@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md. Jobayer Patwary's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #2c2c2c;
+            color: #d3d3d3;
+            line-height: 1.6;
+        }
+
+        /* Apply glass effect to the header */
+        header {
+            background: rgba(26, 26, 26, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Navbar container */
+        header nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Navbar list styles */
+        header nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Navbar items */
+        header nav ul li {
+            margin: 0 15px;
+        }
+
+        header nav ul li a {
+            color: #d3d3d3;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        header nav ul li a:hover {
+            color: #ffffff;
+        }
+
+        .hero {
+            background: #333333;
+            padding: 120px 20px;
+            text-align: center;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #d3d3d3;
+        }
+
+        /* Apply glass effect to the sections */
+        .about,
+        .projects,
+        .contact {
+            padding: 50px 20px;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            background: rgba(61, 61, 61, 0.5);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            color: #d3d3d3;
+        }
+
+        .about h2,
+        .projects h2,
+        .contact h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .about h2::after,
+        .projects h2::after,
+        .contact h2::after {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: #d3d3d3;
+            display: block;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+
+        .project-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 70px;
+            justify-content: center;
+        }
+
+        /* Apply glass effect to project items */
+        .project-item {
+            background: rgba(76, 76, 76, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border: 1px solid rgba(92, 92, 92, 0.7);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-item h3 {
+            margin-bottom: 10px;
+            color: #ffffff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(92, 92, 92, 0.7);
+        }
+
+        .project-item:hover h3 {
+            color: #d3d3d3;
+        }
+
+        .project-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(0, 0, 0, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            z-index: 0;
+        }
+
+        .project-item:hover::before {
+            top: -30%;
+            left: -30%;
+            width: 160%;
+            height: 160%;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+
+        .contact-info a {
+            color: #d3d3d3;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .contact-info a:hover {
+            color: #ffffff;
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #d3d3d3;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about h2,
+            .projects h2,
+            .contact h2 {
+                font-size: 1.5rem;
+            }
+
+            .project-list {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            header nav {
+                flex-direction: row;
+                align-items: center;
+                gap: 30px;
+            }
+
+            header nav ul {
+                flex-direction: row;
+                gap: 20px;
+            }
+
+            header nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero {
+                padding: 100px 20px;
+            }
+
+            .project-item {
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 20px;
+            }
+
+            .project-item {
+                max-width: 100%;
+            }
+
+            .contact-info {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .about h2,
+            .projects h2,
+            .contact h2 {
+                font-size: 1.2rem;
+            }
+
+            .contact-info {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Welcome to My Portfolio</h1>
+        <p>I'm Md. Jobayer Patwary, a student at Motijheel Model School and College, aspiring to become a successful
+            developer.</p>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About Me</h2>
+        <p>Hello! I'm Md. Jobayer Patwary, currently a student in Class 8 at Motijheel Model School and College, located
+            in the heart of Dhaka, Bangladesh. I have always been fascinated by technology and programming, which led me
+            to start developing projects like desktop assistants, weather applications, calculators, and file management
+            systems at an early age.</p>
+
+        <p>My journey into the world of programming started with curiosity about how software works. This curiosity
+            quickly turned into a passion, and I began learning different programming languages and creating projects
+            that solve real-world problems. I believe that with dedication and continuous learning, I can achieve my
+            goal of becoming a successful developer in the future.</p>
+
+
+        <p>In addition to programming, I have developed skills in logo design, banner design, and editing. These
+            creative
+            skills allow me to express my artistic side while complementing my technical abilities, making me a
+            well-rounded
+            individual in the digital world.
+        </p>
+        <p>As a student in Bangladesh, I am also actively engaged in my academic life. My studies at Motijheel Model
+            School and College are helping me build a strong foundation in science and technology, while also developing
+            essential skills like critical thinking, problem-solving, and teamwork.</p>
+    </section>
+
+    <section id="family" class="about">
+        <h2>Family Info</h2>
+        <p>My family is the backbone of my life, providing me with constant support and encouragement. We are a small
+            but close-knit family of four members, each contributing to the harmony and happiness of our home.</p>
+
+        <h3>Father: Md. Hasan Patwary</h3>
+        <p>Age: 36</p>
+        <p>Profession: Service holder in Dubai</p>
+        <p>My father is a dedicated and hardworking individual who has been working in Dubai to provide for our family.
+            Despite being away from home, he ensures that we are well taken care of and stays connected with us
+            regularly. His commitment to his work and his family is truly inspiring.</p>
+
+        <h3>Mother: Jasmin Sultana</h3>
+        <p>Age: 35</p>
+        <p>Profession: Teacher and Housekeeper</p>
+        <p>My mother is the heart of our family, balancing her responsibilities as a teacher and a housekeeper with
+            grace and efficiency. She is a source of love, care, and wisdom, always guiding us with her nurturing
+            presence. Her dedication to both her profession and family is something I deeply admire.</p>
+
+        <h3>Myself: Md. Jobayer Patwary</h3>
+        <p>Age: 15</p>
+        <p>Profession: Student</p>
+        <p>As a student, I am currently focusing on my studies and honing my skills in technology and programming. I
+            aspire to follow in my family's footsteps by being diligent, responsible, and ambitious in all my endeavors.
+            My passion for learning and creating new things keeps me motivated every day.</p>
+
+        <h3>Sister: Umama Binte Hasan</h3>
+        <p>Age: 6</p>
+        <p>Profession: Student of Nursery</p>
+        <p>My younger sister, Umama, is the joy of our family. At just six years old, she is full of energy and
+            curiosity, constantly exploring the world around her. She is a bright and cheerful child, bringing smiles
+            and laughter to everyone she meets. Her innocence and enthusiasm remind us all to appreciate the simple joys
+            of life.</p>
+    </section>
+
+
+    <section id="projects" class="projects">
+        <h2>Projects</h2>
+
+        <h3>Top 3 Python Projects</h3>
+        <div class="project-list">
+            <div class="project-item">
+                <h4>Desktop Assistant</h4>
+                <p>This project involves building a voice-activated desktop assistant that can execute commands like
+                    playing music, searching the web, or providing information using natural language processing and
+                    automation tools like Pyttsx3, SpeechRecognition, and PyWhatKit.</p>
+            </div>
+            <div class="project-item">
+                <h4>Weather App</h4>
+                <p>A graphical user interface (GUI) based application developed using Python and Tkinter that allows
+                    users to check the weather conditions for any city by integrating with weather APIs. The project
+                    emphasizes user experience, error handling, and real-time data fetching.</p>
+            </div>
+            <div class="project-item">
+                <h4>Currency Converter</h4>
+                <p>This Python project converts one currency to another using real-time exchange rates fetched from an
+                    API. The project demonstrates the use of API requests, user input validation, and basic arithmetic
+                    operations in Python.</p>
+            </div>
+        </div>
+
+        <h3>Top 3 HTML, CSS, JS Projects</h3>
+        <div class="project-list">
+            <div class="project-item">
+                <h4>Calculator</h4>
+                <p>A web-based calculator built using HTML, CSS, and JavaScript, allowing users to perform basic
+                    arithmetic operations. The project showcases the use of JavaScript for handling user input,
+                    performing calculations, and dynamically updating the UI.</p>
+            </div>
+            <div class="project-item">
+                <h4>Weather App</h4>
+                <p>This project creates a weather application using HTML, CSS, and JavaScript that fetches weather data
+                    from an external API and displays it to the user. It emphasizes asynchronous JavaScript, API
+                    integration, and responsive design.</p>
+            </div>
+            <div class="project-item">
+                <h4>Digital Clock</h4>
+                <p>A simple digital clock developed using HTML, CSS, and JavaScript that updates in real-time. This
+                    project demonstrates the use of JavaScript’s Date object and setInterval function to create a
+                    continuously updating clock.</p>
+            </div>
+        </div>
+
+        <h3>Top 3 C/C++ Projects</h3>
+        <div class="project-list">
+            <div class="project-item">
+                <h4>Temperature Unit Converter</h4>
+                <p>A console application written in C that converts temperature values between Celsius, Fahrenheit, and
+                    Kelvin. The project illustrates the use of basic C programming concepts like functions,
+                    conditionals, and user input/output handling.</p>
+            </div>
+            <div class="project-item">
+                <h4>Number Guessing Game</h4>
+                <p>This is a simple command-line game in C where the user has to guess a randomly generated number
+                    within a certain range. The project highlights loops, conditionals, and the use of the random number
+                    generation function in C.</p>
+            </div>
+            <div class="project-item">
+                <h4>Calculator</h4>
+                <p>A basic calculator application developed in C/C++ that can perform addition, subtraction,
+                    multiplication, and division. This project involves user input, arithmetic operations, and a simple
+                    loop for continuous operation.</p>
+            </div>
+        </div>
+
+        <h3>Top 3 Java Projects</h3>
+        <div class="project-list">
+            <div class="project-item">
+                <h4>Percentage Calculator</h4>
+                <p>This Java application calculates the percentage of obtained marks out of total marks provided by the
+                    user. The project showcases Java basics like input handling, arithmetic operations, and console
+                    output.</p>
+            </div>
+            <div class="project-item">
+                <h4>Calculator</h4>
+                <p>A command-line calculator in Java that allows users to perform various arithmetic operations. This
+                    project demonstrates the use of switch-case statements and basic I/O operations in Java.</p>
+            </div>
+            <div class="project-item">
+                <h4>Number Guessing Game</h4>
+                <p>This Java program is a simple game where the user guesses a number generated by the computer. The
+                    project highlights concepts like loops, conditionals, and random number generation in Java.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <p>If you'd like to get in touch with me, feel free to reach out via email or WhatsApp:</p>
+        <div class="contact-info">
+            <p>Email: <a href="mailto:jubbathegreat@gmail.com">jubbathegreat@gmail.com</a></p>
+            <p>WhatsApp: <a href="https://wa.me/8801309673868">01309673868</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Md. Jobayer Patwary. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const titles = document.querySelectorAll('.project-title');
+
+            titles.forEach(title => {
+                title.addEventListener('click', () => {
+                    const url = title.getAttribute('data-url');
+
+                    if (url) {
+                        window.open(url, '_blank'); // Opens the URL in a new tab/window
+                    }
+
+                    const codePreview = title.nextElementSibling;
+                    if (codePreview.style.display === 'block') {
+                        codePreview.style.display = 'none';
+                    } else {
+                        codePreview.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
+    <!-- <script src="script.js"></script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sections = document.querySelectorAll('.about, .projects, .contact');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Create mailto link
+            const subject = encodeURIComponent('Contact Form Submission from ' + name);
+            const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message);
+            const mailtoLink = `mailto:your-email@gmail.com?subject=${subject}&body=${body}`;
+
+            // Open mailto link
+            window.location.href = mailtoLink;
+        });
+
+
+    </script>
+</body>
+
+</html>
